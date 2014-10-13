@@ -15,9 +15,7 @@ module SoFarSoGood
       def sections
         @sections ||= begin
           hash = {}
-          numbers.each_with_index do |number, index|
-            hash[number] = subjects[index]
-          end
+          numbers.each_with_index { |number, index| hash[number] = subjects[index] }
           hash
         end
       end
@@ -49,9 +47,7 @@ module SoFarSoGood
       def rows
         @rows ||= begin
           rows = []
-          sections.each do |number, description|
-            rows << [number,description]
-          end
+          sections.each { |number, description| rows << [number,description] }
           rows
         end
       end
