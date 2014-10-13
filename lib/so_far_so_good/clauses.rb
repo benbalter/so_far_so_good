@@ -2,12 +2,14 @@ module SoFarSoGood
   class Clauses
     class << self
 
+      HEADINGS = ["Clause", "Description"]
+
       def numbers
-        @numbers ||= subpart.css("SECTNO").map { |n| n.text }
+        @numbers ||= subpart.css("SECTNO").map { |n| n.text.strip }
       end
 
       def subjects
-        @subjects ||= subpart.css("SUBJECT").map { |n| n.text }
+        @subjects ||= subpart.css("SUBJECT").map { |n| n.text.strip }
       end
 
       def sections
@@ -18,6 +20,14 @@ module SoFarSoGood
           end
           hash
         end
+      end
+
+      def to_md
+        @md ||= Terminal::Table.new(:rows => rows, :style => { :border_i => "|" }, :headings => HEADINGS).to_s
+      end
+
+      def to_json
+        @json ||= sections.to_json
       end
 
       private
@@ -34,6 +44,14 @@ module SoFarSoGood
 
       def subpart
         @subpart ||= doc.css("SUBPART")[1]
+      end
+
+      def rows
+        rows = []
+        sections.each do |number, description|
+          rows << [number,description]
+        end
+        rows
       end
     end
   end
