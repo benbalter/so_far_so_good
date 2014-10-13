@@ -47,11 +47,13 @@ module SoFarSoGood
       end
 
       def rows
-        rows = []
-        sections.each do |number, description|
-          rows << [number,description]
+        @rows ||= begin
+          rows = []
+          sections.each do |number, description|
+            rows << [number,description]
+          end
+          rows
         end
-        rows
       end
     end
   end
