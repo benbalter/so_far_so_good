@@ -9,4 +9,8 @@ class TestSoFarSoGood < Minitest::Test
     assert_equal Array, SoFarSoGood.clauses.class
     assert_equal 616, SoFarSoGood.clauses.count
   end
+
+  should "accept clause options" do
+    assert_equal 567, SoFarSoGood.clauses(:exclude_reserved => true).count
+  end
 end

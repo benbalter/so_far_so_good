@@ -10,7 +10,7 @@ class TestSoFarSoGoodClauses < Minitest::Test
   end
 
   should "parse the rows" do
-    assert_equal 567, SoFarSoGood::Clauses.send(:rows).count
+    assert_equal 616, SoFarSoGood::Clauses.send(:rows).count
     assert_equal ["52.200", "Scope of subpart."], SoFarSoGood::Clauses.send(:rows).first
   end
 
@@ -30,5 +30,13 @@ class TestSoFarSoGoodClauses < Minitest::Test
 
   should "return a particular clause" do
     assert_equal "52.202-1", SoFarSoGood::Clauses["52.202-1"].number
+  end
+
+  should "return all clauses" do
+    assert_equal 616, SoFarSoGood::Clauses.list.count
+  end
+
+  should "filter reserved clauses" do
+    assert_equal 567, SoFarSoGood::Clauses.list(:exclude_reserved => true).count
   end
 end

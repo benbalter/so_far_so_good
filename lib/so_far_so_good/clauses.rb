@@ -4,21 +4,23 @@ module SoFarSoGood
 
       HEADINGS = ["Clause", "Description"]
 
-      def numbers(exclude_reserved=false)
-        @numbers ||= clauses(exclude_reserved).map { |c| c.number }
+      def numbers(options = {})
+        @numbers ||= clauses(options).map { |c| c.number }
       end
 
-      def subjects(exclude_reserved=false)
-        @subjects ||= clauses(exclude_reserved).map { |c| c.subject }
+      def subjects(options = {})
+        @subjects ||= clauses(options).map { |c| c.subject }
       end
       alias_method :descriptions, :subjects
 
-      def clauses(exclude_reserved = false)
-        @clauses ||= begin
-          clauses = sections.map { |node| SoFarSoGood::Clause.new(node) }
-          clauses.select { |c| !c.reserved } if exclude_reserved
-          clauses
-        end
+      def clauses(options = {})
+        options = {:exclude_reserved => false}.merge(options)
+        @clauses ||= sections.map { |node| SoFarSoGood::Clause.new(node) }
+        if options[:exclude_reserved]
+          @clauses.reject { |c| c.reserved }
+        else
+          @clauses
+        end 
       end
       alias_method :list, :clauses
 
@@ -50,8 +52,8 @@ module SoFarSoGood
         @subpart ||= doc.css("PART SUBPART")[4].children.css("SECTION")
       end
 
-      def rows
-        @rows ||= clauses.reject { |c| c.reserved }.map { |c| [c.number, c.subject]}
+      def rows(options={})
+        @rows ||= clauses(options).map { |c| [c.number, c.subject]}
       end
     end
   end

@@ -7,8 +7,8 @@ require_relative "so_far_so_good/clause"
 
 module SoFarSoGood
   class << self
-    def clauses
-      SoFarSoGood::Clauses.clauses
+    def clauses(options = {})
+      SoFarSoGood::Clauses.clauses(options)
     end
 
     def vendor_directory

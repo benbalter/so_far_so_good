@@ -37,7 +37,7 @@ SoFarSoGood::Clauses.numbers
 => ["52.200", "52.202-1", "52.203-1", "52.203-2", "52.203-3", "52.203-4", "52.203-5", ... ]
 
 # Get a list of clause numbers, excluding reserved clauses
-SoFarSoGood::Clauses.numbers(true)
+SoFarSoGood::Clauses.numbers(:exclude_reserved => true)
 => ["52.200", "52.202-1", "52.203-1", "52.203-2", "52.203-3", "52.203-4", "52.203-5", ... ]
 
 # Get a list of clause subjects
