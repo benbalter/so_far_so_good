@@ -9,11 +9,6 @@ class TestSoFarSoGoodClauses < Minitest::Test
     assert Nokogiri::XML::Document, SoFarSoGood::Clauses.send(:doc).class
   end
 
-  should "parse the rows" do
-    assert_equal 616, SoFarSoGood::Clauses.send(:rows).count
-    assert_equal ["52.200", "Scope of subpart."], SoFarSoGood::Clauses.send(:rows).first
-  end
-
   should "parse section numbers" do
     assert_equal 616, SoFarSoGood::Clauses.numbers.count
     assert_equal "52.200", SoFarSoGood::Clauses.numbers.first
@@ -38,5 +33,17 @@ class TestSoFarSoGoodClauses < Minitest::Test
 
   should "filter reserved clauses" do
     assert_equal 567, SoFarSoGood::Clauses.list(:exclude_reserved => true).count
+  end
+
+  should "build the markdown table" do
+    assert_includes SoFarSoGood::Clauses.to_md, "-|\n| 52.200              | Scope of subpart."
+  end
+
+  should "exclude reserved in markdown table when asked" do
+    refute_includes SoFarSoGood::Clauses.to_md(:exclude_reserved => true), "[Reserved]"
+  end
+
+  should "inlcude links in markdown table when asked" do
+    assert_includes SoFarSoGood::Clauses.to_md(:links => true), "[52.252-6](http://www.law.cornell.edu/cfr/text/48/52.252-6)"
   end
 end

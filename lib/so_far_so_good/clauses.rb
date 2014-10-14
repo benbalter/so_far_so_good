@@ -20,16 +20,18 @@ module SoFarSoGood
           @clauses.reject { |c| c.reserved }
         else
           @clauses
-        end 
+        end
       end
       alias_method :list, :clauses
 
-      def to_md
-        @md ||= Terminal::Table.new(:rows => rows, :style => { :border_i => "|" }, :headings => HEADINGS).to_s
+      def to_md(options = {})
+        options = {:exclude_reserved => false, :links => false}.merge(options)
+        rows = clauses(options).map { |c| [ options[:links] ? "[#{c.number}](#{c.link})" : c.number , c.subject] }
+        Terminal::Table.new(:rows => rows, :style => { :border_i => "|" }, :headings => HEADINGS).to_s
       end
 
-      def to_json
-        @json ||= clauses.to_json
+      def to_json(options = {})
+        clauses(options).to_json(options)
       end
 
       def [](number)
@@ -39,7 +41,7 @@ module SoFarSoGood
       private
 
       def source_path
-        File.expand_path "CFR-2010-title48-vol2-chap1-subchapH.xml", SoFarSoGood.vendor_directory
+        @source_path ||= File.expand_path "CFR-2010-title48-vol2-chap1-subchapH.xml", SoFarSoGood.vendor_directory
       end
 
       def doc
@@ -50,10 +52,6 @@ module SoFarSoGood
 
       def sections
         @subpart ||= doc.css("PART SUBPART")[4].children.css("SECTION")
-      end
-
-      def rows(options={})
-        @rows ||= clauses(options).map { |c| [c.number, c.subject]}
       end
     end
   end
