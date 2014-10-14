@@ -25,13 +25,22 @@ module SoFarSoGood
       alias_method :list, :clauses
 
       def to_md(options = {})
-        options = {:exclude_reserved => false, :links => false}.merge(options)
+        options = {:links => false}.merge(options)
         rows = clauses(options).map { |c| [ options[:links] ? "[#{c.number}](#{c.link})" : c.number , c.subject] }
         Terminal::Table.new(:rows => rows, :style => { :border_i => "|" }, :headings => HEADINGS).to_s
       end
 
       def to_json(options = {})
         clauses(options).to_json(options)
+      end
+
+      def to_csv(options = {})
+        CSV.generate do |csv|
+          csv << HEADINGS
+          clauses(options).each do |c|
+            csv << [c.number , c.subject]
+          end
+        end
       end
 
       def [](number)

@@ -116,6 +116,17 @@ puts SoFarSoGood::Clauses.to_md(:links => true)
 ...
 ```
 
+#### As a CSV
+```ruby
+puts SoFarSoGood::Clauses.to_csv(:exclude_reserved => true )
+Clause,Description
+52.200,Scope of subpart.
+52.202-1,Definitions.
+52.203-2,Certificate of Independent Price Determination.
+52.203-3,Gratuities.
+52.203-5,Covenant Against Contingent Fees.
+```
+
 #### Individual clauses as markdown
 
 ```ruby

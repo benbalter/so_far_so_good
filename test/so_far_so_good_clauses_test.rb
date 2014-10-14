@@ -46,4 +46,9 @@ class TestSoFarSoGoodClauses < Minitest::Test
   should "inlcude links in markdown table when asked" do
     assert_includes SoFarSoGood::Clauses.to_md(:links => true), "[52.252-6](http://www.law.cornell.edu/cfr/text/48/52.252-6)"
   end
+
+  should "output valid CSV" do
+    csv = CSV.parse SoFarSoGood::Clauses.to_csv
+    assert_equal ["52.200", "Scope of subpart."], csv[0]
+  end
 end
