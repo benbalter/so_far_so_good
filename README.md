@@ -24,7 +24,7 @@ It will give you access to this information in object-oriented Ruby, as JSON, or
 
 ### Basic usage
 
-```irb
+```ruby
 # Get all clauses
 clauses = SoFarSoGood.clauses
 => [#<SoFarSoGood::Clause @number="52.200" @subject="Scope of subpart." @reserved="false",
@@ -48,7 +48,7 @@ SoFarSoGood::Clauses.subjects
 
 ### Working with individual clauses
 
-```irb
+```ruby
 # Get a specific clause
 clause = SoFarSoGood::Clauses["52.202-1"]
 => #<SoFarSoGood::Clause @number="52.202-1" @subject="Definitions." @reserved="false"
@@ -81,7 +81,7 @@ clause.link
 
 #### As JSON
 
-```irb
+```ruby
 
 SoFarSoGood::Clauses.list.to_json
 => "[{\"number\":\"52.200\",\"subject\":\"Scope of subpart.\",\"reserverd\":false,\"citation\":..."
@@ -89,7 +89,7 @@ SoFarSoGood::Clauses.list.to_json
 
 #### As a markdown table
 
-```irb
+```ruby
 puts SoFarSoGood::Clauses.to_md
 |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Clause    | Description                                                                                                                                                   |
@@ -118,7 +118,7 @@ puts SoFarSoGood::Clauses.to_md(:links => true)
 
 #### Individual clauses as markdown
 
-```irb
+```ruby
 # The body
 puts SoFarSoGood::Clauses["52.202-1"].body(:format => :markdown)
 => As prescribed in 2.201, insert the following clause:
