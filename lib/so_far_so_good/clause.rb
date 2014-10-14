@@ -66,7 +66,7 @@ module SoFarSoGood
     end
 
     def inspect
-      "#<SoFarSoGood::Clause @number=\"#{@number}\" @subject=\"#{@subject}\" @reserved=\"#{@reserved}\""
+      "#<SoFarSoGood::Clause number=\"#{number}\" subject=\"#{subject}\" reserved=#{reserved}>"
     end
 
     private
