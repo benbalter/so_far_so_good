@@ -1,24 +1,48 @@
 module SoFarSoGood
   class Clause
 
-    attr_reader :number
-    attr_reader :subject
-    attr_reader :reserved
-    attr_reader :citation
-    attr_reader :extract
-    attr_reader :body
+    attr_reader :node
 
     def initialize(node)
-      @number = node.css("SECTNO").text.strip
-      @subject = node.css("SUBJECT, RESERVED").text.strip
-      @reserved = !node.css("RESERVED").text.empty?
-      @citation = node.css("CITA").text.strip
-      @extract = node.css("EXTRACT").text.strip
-      @body = node.children.css("P").text.strip
+      @node = node
+      normalize!
+    end
+
+    def number
+      @number ||= node.css("SECTNO").text.strip
+    end
+
+    def subject
+      @subject ||= node.css("SUBJECT, RESERVED").text.strip
     end
 
     def reserved?
-      !!@reserved
+      @reserved ||= !node.css("RESERVED").text.empty?
+    end
+    alias_method :reserved, :reserved?
+
+    def citation
+      @citation ||= node.css("CITA").text.strip
+    end
+
+    def extract(options = {})
+      options = {:format => :html}.merge(options)
+      @extract ||= node.css("EXTRACT").inner_html
+      if options[:format] == :markdown
+        ReverseMarkdown.convert @extract
+      else
+        @extract
+      end
+    end
+
+    def body(options = {})
+      options = {:format => :html}.merge(options)
+      @body ||= node.css("> P").to_html
+      if options[:format] == :markdown
+        ReverseMarkdown.convert @body
+      else
+        @body
+      end
     end
 
     def to_hash
@@ -38,6 +62,13 @@ module SoFarSoGood
 
     def inspect
       "#<SoFarSoGood::Clause @number=\"#{@number}\" @subject=\"#{@subject}\" @reserved=\"#{@reserved}\""
+    end
+
+    private
+
+    def normalize!
+      node.children.css("E").each { |n| n.name = "em" }
+      node.children.css("HD").each { |n| n.name = "h3" }
     end
   end
 end

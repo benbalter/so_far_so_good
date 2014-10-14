@@ -1,6 +1,7 @@
 require "nokogiri"
 require "terminal-table"
 require "json"
+require "reverse_markdown"
 require_relative "so_far_so_good/version"
 require_relative "so_far_so_good/clauses"
 require_relative "so_far_so_good/clause"

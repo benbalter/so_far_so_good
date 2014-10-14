@@ -75,11 +75,17 @@ clause.extract
 
 ### Using clause data elsewhere
 
+#### As JSON
+
 ```ruby
 
 SoFarSoGood::Clauses.list.to_json
 => "[{\"number\":\"52.200\",\"subject\":\"Scope of subpart.\",\"reserverd\":false,\"citation\":..."
+```
 
+#### As a markdown table
+
+```ruby
 puts SoFarSoGood::Clauses.to_md
 |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Clause    | Description                                                                                                                                                   |
@@ -91,6 +97,20 @@ puts SoFarSoGood::Clauses.to_md
 | 52.203-5  | Covenant Against Contingent Fees.                                                                                                                             |
 ```
 
+#### Individual clauses as markdown
+
+```ruby
+
+# The body
+puts SoFarSoGood::Clauses["52.202-1"].body(:format => :markdown)
+=> As prescribed in 2.201, insert the following clause:
+
+# The extract
+puts SoFarSoGood::Clauses["52.202-1"].extract(:format => :markdown)
+=> ### Definitions (JUL 2004)
+
+(a) When a solicitation provision or contract clause uses a word or term that is defined in the Federal Acquisition Regulation (FAR), the word or term has the same meaning as the definition in FAR 2.101 in effect at the time the solicitation was issued, unless— ...
+```
 
 ## Installation
 
