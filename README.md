@@ -16,6 +16,7 @@ For any contract clause, it will provide:
 * The formal citation
 * The body (full clause text)
 * The extract (what's inserted into the contract)
+* A link to the full text online
 
 It will give you access to this information in object-oriented Ruby, as JSON, or as a markdown table for use elsewhere.
 
@@ -71,6 +72,9 @@ clause.body
 # The actual clause text to be inserted in the contract
 clause.extract
 => "Definitions (JUL 2004)(a) When a solicitation provision or contract clause uses a word..."
+
+clause.link
+=> "http://www.law.cornell.edu/cfr/text/48/52.202-1"
 ```
 
 ### Using clause data elsewhere
