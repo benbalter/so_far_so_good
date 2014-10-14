@@ -27,4 +27,8 @@ class TestSoFarSoGoodClauses < Minitest::Test
   should "put out valid JSON" do
     assert !!JSON.parse(SoFarSoGood::Clauses.list.to_json)
   end
+
+  should "return a particular clause" do
+    assert_equal "52.202-1", SoFarSoGood::Clauses["52.202-1"].number
+  end
 end

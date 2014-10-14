@@ -17,6 +17,10 @@ module SoFarSoGood
       @body = node.children.css("P").text.strip
     end
 
+    def reserved?
+      !!@reserved
+    end
+
     def to_hash
       {
         :number    => @number,
@@ -30,6 +34,10 @@ module SoFarSoGood
 
     def to_json(options = {})
       to_hash.to_json(options)
+    end
+
+    def inspect
+      "#<SoFarSoGood::Clause @number=\"#{@number}\" @subject=\"#{@subject}\" @reserved=\"#{@reserved}\""
     end
   end
 end

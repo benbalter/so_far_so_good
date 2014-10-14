@@ -4,17 +4,21 @@ module SoFarSoGood
 
       HEADINGS = ["Clause", "Description"]
 
-      def numbers
-        @numbers ||= clauses.map { |c| c.number }
+      def numbers(exclude_reserved=false)
+        @numbers ||= clauses(exclude_reserved).map { |c| c.number }
       end
 
-      def subjects
-        @subjects ||= clauses.map { |c| c.subject }
+      def subjects(exclude_reserved=false)
+        @subjects ||= clauses(exclude_reserved).map { |c| c.subject }
       end
       alias_method :descriptions, :subjects
 
-      def clauses
-        @clauses ||= sections.map { |node| SoFarSoGood::Clause.new(node) }
+      def clauses(exclude_reserved = false)
+        @clauses ||= begin
+          clauses = sections.map { |node| SoFarSoGood::Clause.new(node) }
+          clauses.select { |c| !c.reserved } if exclude_reserved
+          clauses
+        end
       end
       alias_method :list, :clauses
 
