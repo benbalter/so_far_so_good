@@ -11,6 +11,7 @@ module SoFarSoGood
       def subjects
         @subjects ||= subpart.css("SUBJECT").map { |n| n.text.strip }
       end
+      alias_method :descriptions, :subjects
 
       def sections
         @sections ||= begin
