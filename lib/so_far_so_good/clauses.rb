@@ -27,7 +27,7 @@ module SoFarSoGood
       end
 
       def to_json
-        @json ||= sections.to_json
+        @json ||= clauses.to_json
       end
 
       def [](number)
