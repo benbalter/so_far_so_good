@@ -48,6 +48,10 @@ class TestSoFarSoGoodClause < Minitest::Test
     assert_includes @clause.extract(:format => :markdown), "### Covenant Against Contingent Fees (APR 1984)\n\n(a)"
   end
 
+  should "build the link" do
+    assert_equal "http://www.law.cornell.edu/cfr/text/48/52.203-5", @clause.link
+  end
+
   should "put out valid json" do
     assert JSON.parse SoFarSoGood::Clauses["52.203-5"].to_json
   end

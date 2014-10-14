@@ -100,7 +100,6 @@ puts SoFarSoGood::Clauses.to_md
 #### Individual clauses as markdown
 
 ```ruby
-
 # The body
 puts SoFarSoGood::Clauses["52.202-1"].body(:format => :markdown)
 => As prescribed in 2.201, insert the following clause:

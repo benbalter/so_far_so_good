@@ -25,6 +25,10 @@ module SoFarSoGood
       @citation ||= node.css("CITA").text.strip
     end
 
+    def link
+      @link ||= "http://www.law.cornell.edu/cfr/text/48/#{number}"
+    end
+
     def extract(options = {})
       options = {:format => :html}.merge(options)
       @extract ||= node.css("EXTRACT").inner_html
@@ -45,19 +49,20 @@ module SoFarSoGood
       end
     end
 
-    def to_hash
+    def to_hash(options={})
       {
-        :number    => @number,
-        :subject   => @subject,
-        :reserverd => @reserved,
-        :citation  => @citation,
-        :extract   => @extract,
-        :body      => @body
+        :number    => number,
+        :subject   => subject,
+        :reserverd => reserved,
+        :citation  => citation,
+        :extract   => extract(options),
+        :body      => body(options),
+        :link      => link
       }
     end
 
     def to_json(options = {})
-      to_hash.to_json(options)
+      to_hash(options).to_json(options)
     end
 
     def inspect
