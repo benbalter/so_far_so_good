@@ -6,7 +6,18 @@ A Ruby Gem to parse and manipulate the Federal Acquisition Regulation
 
 ## What it does
 
-Right now, it simply gives you a hash of FAR 52.2x clauses and their description, but soon, much, much more!
+So FAR so Good is a Ruby Gem to interact with the Federal Acquisition Regulation. Right now, it only supports section 52.20x, the FAR standard contracting clause templates.
+
+For any contract clause, it will provide:
+
+* The section number
+* The subject
+* Whether it's a reserved section
+* The formal citation
+* The body (full clause text)
+* The extract (what's inserted into the contract)
+
+It will give you access to this information in object-oriented Ruby, as JSON, or as a markdown table for use elsewhere.
 
 ## Usage
 
