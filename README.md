@@ -2,6 +2,8 @@
 
 A Ruby Gem to parse and manipulate the Federal Acquisition Regulation
 
+[![Gem Version](https://badge.fury.io/rb/so_far_so_good.svg)](http://badge.fury.io/rb/so_far_so_good) [![Build Status](https://travis-ci.org/benbalter/so_far_so_good.svg)](https://travis-ci.org/benbalter/so_far_so_good)
+
 ## What it does
 
 Right now, it simply gives you a hash of FAR 52.2x clauses and their description, but soon, much, much more!
