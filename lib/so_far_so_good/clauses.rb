@@ -14,7 +14,7 @@ module SoFarSoGood
       alias_method :descriptions, :subjects
 
       def clauses
-        sections.map { |node| SoFarSoGood::Clause.new(node) }
+        @clauses ||= sections.map { |node| SoFarSoGood::Clause.new(node) }
       end
       alias_method :list, :clauses
 
@@ -39,7 +39,7 @@ module SoFarSoGood
       end
 
       def sections
-        @subpart ||= doc.css("PART SUBPART")[3].children.css("SECTION")
+        @subpart ||= doc.css("PART SUBPART")[4].children.css("SECTION")
       end
 
       def rows
