@@ -95,6 +95,21 @@ puts SoFarSoGood::Clauses.to_md
 | 52.203-2  | Certificate of Independent Price Determination.                                                                                                               |
 | 52.203-3  | Gratuities.                                                                                                                                                   |
 | 52.203-5  | Covenant Against Contingent Fees.                                                                                                                             |
+...
+
+# Table without reserved clauses
+puts SoFarSoGood::Clauses.to_md(:exclude_reserved => true)
+
+# Table with links to text
+puts SoFarSoGood::Clauses.to_md(:links => true)
+...
+| [52.222-34](http://www.law.cornell.edu/cfr/text/48/52.222-34) | Project Labor Agreement.                                                                                                                                      |
+| [52.222-35](http://www.law.cornell.edu/cfr/text/48/52.222-35) | Equal Opportunity for Veterans.                                                                                                                               |
+| [52.222-36](http://www.law.cornell.edu/cfr/text/48/52.222-36) | Affirmative Action for Workers With Disabilities.                                                                                                             |
+| [52.222-37](http://www.law.cornell.edu/cfr/text/48/52.222-37) | Employment Reports on Veterans.                                                                                                                               |
+| [52.222-38](http://www.law.cornell.edu/cfr/text/48/52.222-38) | Compliance with Veterans' Employment Reporting Requirements.                                                                                                  |
+| [52.222-41](http://www.law.cornell.edu/cfr/text/48/52.222-41) | Service Contract Act of 1965.
+...
 ```
 
 #### Individual clauses as markdown
