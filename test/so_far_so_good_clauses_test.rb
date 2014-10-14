@@ -9,18 +9,14 @@ class TestSoFarSoGoodClauses < Minitest::Test
     assert Nokogiri::XML::Document, SoFarSoGood::Clauses.send(:doc).class
   end
 
-  should "get to the subpart" do
-    assert "SUBPART", SoFarSoGood::Clauses.send(:subpart).name
-  end
-
   should "parse the rows" do
     assert SoFarSoGood::Clauses.send(:rows).count > 3
-    assert_equal ["52.200", "Scope of subpart."], SoFarSoGood::Clauses.send(:rows).first
+    assert_equal ["52.100", "Scope of subpart."], SoFarSoGood::Clauses.send(:rows).first
   end
 
   should "parse section numbers" do
     assert SoFarSoGood::Clauses.numbers.count > 3
-    assert_equal "52.200", SoFarSoGood::Clauses.numbers.first
+    assert_equal "52.100", SoFarSoGood::Clauses.numbers.first
   end
 
   should "parse section descriptions" do
@@ -29,6 +25,6 @@ class TestSoFarSoGoodClauses < Minitest::Test
   end
 
   should "put out valid JSON" do
-    assert JSON.parse(SoFarSoGood::Clauses.to_json)
+    assert !!JSON.parse(SoFarSoGood::Clauses.list.to_json)
   end
 end

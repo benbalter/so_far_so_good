@@ -5,21 +5,18 @@ module SoFarSoGood
       HEADINGS = ["Clause", "Description"]
 
       def numbers
-        @numbers ||= subpart.css("SECTNO").map { |n| n.text.strip }
+        @numbers ||= clauses.map { |c| c.number }
       end
 
       def subjects
-        @subjects ||= subpart.css("SUBJECT").map { |n| n.text.strip }
+        @subjects ||= clauses.map { |c| c.subject }
       end
       alias_method :descriptions, :subjects
 
-      def sections
-        @sections ||= begin
-          hash = {}
-          numbers.each_with_index { |number, index| hash[number] = subjects[index] }
-          hash
-        end
+      def clauses
+        sections.map { |node| SoFarSoGood::Clause.new(node) }
       end
+      alias_method :list, :clauses
 
       def to_md
         @md ||= Terminal::Table.new(:rows => rows, :style => { :border_i => "|" }, :headings => HEADINGS).to_s
@@ -41,16 +38,12 @@ module SoFarSoGood
         end
       end
 
-      def subpart
-        @subpart ||= doc.css("SUBPART")[1]
+      def sections
+        @subpart ||= doc.css("PART SUBPART")[3].children.css("SECTION")
       end
 
       def rows
-        @rows ||= begin
-          rows = []
-          sections.each { |number, description| rows << [number,description] }
-          rows
-        end
+        @rows ||= clauses.map { |c| [c.number, c.subject]}
       end
     end
   end
