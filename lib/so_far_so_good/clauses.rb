@@ -26,6 +26,10 @@ module SoFarSoGood
         @json ||= sections.to_json
       end
 
+      def [](number)
+        clauses.find { |c| c.number == number }
+      end
+
       private
 
       def source_path
