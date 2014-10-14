@@ -43,7 +43,7 @@ module SoFarSoGood
       end
 
       def rows
-        @rows ||= clauses.map { |c| [c.number, c.subject]}
+        @rows ||= clauses.reject { |c| c.reserved }.map { |c| [c.number, c.subject]}
       end
     end
   end

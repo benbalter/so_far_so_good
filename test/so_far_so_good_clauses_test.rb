@@ -10,17 +10,17 @@ class TestSoFarSoGoodClauses < Minitest::Test
   end
 
   should "parse the rows" do
-    assert SoFarSoGood::Clauses.send(:rows).count == 616
+    assert_equal 567, SoFarSoGood::Clauses.send(:rows).count
     assert_equal ["52.200", "Scope of subpart."], SoFarSoGood::Clauses.send(:rows).first
   end
 
   should "parse section numbers" do
-    assert SoFarSoGood::Clauses.numbers.count == 616
+    assert_equal 616, SoFarSoGood::Clauses.numbers.count
     assert_equal "52.200", SoFarSoGood::Clauses.numbers.first
   end
 
   should "parse section descriptions" do
-    assert SoFarSoGood::Clauses.descriptions.count == 616
+    assert_equal 616, SoFarSoGood::Clauses.descriptions.count
     assert_equal "Scope of subpart.", SoFarSoGood::Clauses.descriptions.first
   end
 

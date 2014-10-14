@@ -7,6 +7,6 @@ class TestSoFarSoGood < Minitest::Test
 
   should "return the clause hash" do
     assert_equal Array, SoFarSoGood.clauses.class
-    assert SoFarSoGood.clauses.count > 3
+    assert_equal 616, SoFarSoGood.clauses.count
   end
 end
