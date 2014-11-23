@@ -110,7 +110,7 @@ puts SoFarSoGood.far.to_md
 puts SoFarSoGood.dfars.to_md(:reserved => false)
 
 # Table with links to text
-puts SoFarSoGood::Clauses.to_md(:links => true)
+puts SoFarSoGood.far.to_md(:links => true)
 ...
 | [52.222-34](http://www.law.cornell.edu/cfr/text/48/52.222-34) | Project Labor Agreement.                                                                                                                                      |
 | [52.222-35](http://www.law.cornell.edu/cfr/text/48/52.222-35) | Equal Opportunity for Veterans.                                                                                                                               |
