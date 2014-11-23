@@ -19,7 +19,7 @@ module SoFarSoGood
     end
 
     def dfars
-      @dfars ||= SoFarSoGood::Subchapter.new(:name => "DFARs", :volume => 3, :chapter => 2)
+      @dfars ||= SoFarSoGood::Subchapter.new(:name => "DFARS", :volume => 3, :chapter => 2)
     end
 
     def subchapters

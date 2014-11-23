@@ -1,12 +1,12 @@
 # So FAR so Good
 
-A Ruby Gem to parse and manipulate the Federal Acquisition Regulation (FAR) and Defense Federal Acquisition Regulation Supplement (DFARs)
+A Ruby Gem to parse and manipulate the Federal Acquisition Regulation (FAR) and Defense Federal Acquisition Regulation Supplement (DFARS)
 
 [![Gem Version](https://badge.fury.io/rb/so_far_so_good.svg)](http://badge.fury.io/rb/so_far_so_good) [![Build Status](https://travis-ci.org/benbalter/so_far_so_good.svg)](https://travis-ci.org/benbalter/so_far_so_good)
 
 ## What it does
 
-So FAR so Good is a Ruby Gem to interact with the Federal Acquisition Regulation (FAR) and Defense Federal Acquisition Regulation Supplement (DFARs). Right now, it supports section 52.20x and 252.20x, the FAR and DFARs standard contracting clause templates.
+So FAR so Good is a Ruby Gem to interact with the Federal Acquisition Regulation (FAR) and Defense Federal Acquisition Regulation Supplement (DFARS). Right now, it supports section 52.20x and 252.20x, the FAR and DFARS standard contracting clause templates.
 
 For any contract clause, it will provide:
 
@@ -27,7 +27,7 @@ It will give you access to this information in object-oriented Ruby, as JSON, or
 ```ruby
 subchapters = SoFarSoGood.subchapters
 => [#<SoFarSoGood::Subchapter year=2013 title=48 volume=2 chapter=1 name="FAR">,
-    #<SoFarSoGood::Subchapter year=2013 title=48 volume=3 chapter=2 name="DFARs">]
+    #<SoFarSoGood::Subchapter year=2013 title=48 volume=3 chapter=2 name="DFARS">]
 
 # Get the FAR's subparts
 subparts = SoFarSoGood.far.subparts
