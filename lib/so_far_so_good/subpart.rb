@@ -1,10 +1,20 @@
 module SoFarSoGood
-  class Clause
+  class Subpart
 
     attr_reader :node
+    attr_reader :year
+    attr_reader :title
+    attr_reader :volume
+    attr_reader :chapter
+    attr_reader :document
 
-    def initialize(node)
-      @node = node
+    def initialize(hash)
+      @year     = hash[:year]
+      @title    = hash[:title]
+      @volume   = hash[:volume]
+      @chapter  = hash[:chapter]
+      @document = hash[:name]
+      @node     = hash[:node]
       normalize!
     end
 
@@ -51,13 +61,18 @@ module SoFarSoGood
 
     def to_hash(options={})
       {
+        :year      => year,
+        :title     => title,
+        :volume    => volume,
+        :chapter   => chapter,
         :number    => number,
         :subject   => subject,
         :reserverd => reserved,
         :citation  => citation,
         :extract   => extract(options),
         :body      => body(options),
-        :link      => link
+        :link      => link,
+        :document  => document,
       }
     end
 
@@ -66,7 +81,7 @@ module SoFarSoGood
     end
 
     def inspect
-      "#<SoFarSoGood::Clause number=\"#{number}\" subject=\"#{subject}\" reserved=#{reserved}>"
+      "#<SoFarSoGood::Subpart year=#{year} title=#{title} volume=#{volume} chapter=#{chapter} number=\"#{number}\" subject=\"#{subject}\" document=\"#{document}\" reserved=#{reserved}>"
     end
 
     private

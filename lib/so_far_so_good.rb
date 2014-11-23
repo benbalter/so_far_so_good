@@ -4,13 +4,30 @@ require "reverse_markdown"
 require "json"
 require 'csv'
 require_relative "so_far_so_good/version"
-require_relative "so_far_so_good/clauses"
-require_relative "so_far_so_good/clause"
+require_relative "so_far_so_good/subchapter"
+require_relative "so_far_so_good/subpart"
 
 module SoFarSoGood
+
+  HEADINGS = ["Clause", "Description"]
+  YEAR = 2013
+  TITLE = 48
+
   class << self
-    def clauses(options = {})
-      SoFarSoGood::Clauses.clauses(options)
+    def far
+      @far ||= SoFarSoGood::Subchapter.new(:name => "FAR",   :volume => 2, :chapter => 1)
+    end
+
+    def dfars
+      @dfars ||= SoFarSoGood::Subchapter.new(:name => "DFARs", :volume => 3, :chapter => 2)
+    end
+
+    def subchapters
+      [far, dfars]
+    end
+
+    def subparts(options = {})
+      subchapters.map { |d| d.subparts(options) }.flatten
     end
 
     def vendor_directory
