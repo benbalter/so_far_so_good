@@ -30,6 +30,10 @@ module SoFarSoGood
       subchapters.map { |d| d.subparts(options) }.flatten
     end
 
+    def [](subpart)
+      subparts.find { |s| s.number == subpart }
+    end
+
     def vendor_directory
       File.expand_path "../vendor", File.dirname(__FILE__)
     end

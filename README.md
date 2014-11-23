@@ -1,12 +1,12 @@
 # So FAR so Good
 
-A Ruby Gem to parse and manipulate the Federal Acquisition Regulation
+A Ruby Gem to parse and manipulate the Federal Acquisition Regulation (FAR) and Defense Federal Acquisition Regulation Supplement (DFARs)
 
 [![Gem Version](https://badge.fury.io/rb/so_far_so_good.svg)](http://badge.fury.io/rb/so_far_so_good) [![Build Status](https://travis-ci.org/benbalter/so_far_so_good.svg)](https://travis-ci.org/benbalter/so_far_so_good)
 
 ## What it does
 
-So FAR so Good is a Ruby Gem to interact with the Federal Acquisition Regulation. Right now, it only supports section 52.20x, the FAR standard contracting clause templates.
+So FAR so Good is a Ruby Gem to interact with the Federal Acquisition Regulation (FAR) and Defense Federal Acquisition Regulation Supplement (DFARs). Right now, it supports section 52.20x and 252.20x, the FAR and DFARs standard contracting clause templates.
 
 For any contract clause, it will provide:
 
@@ -25,72 +25,77 @@ It will give you access to this information in object-oriented Ruby, as JSON, or
 ### Basic usage
 
 ```ruby
-# Get all clauses
-clauses = SoFarSoGood.clauses
-=> [#<SoFarSoGood::Clause @number="52.200" @subject="Scope of subpart." @reserved="false",
- #<SoFarSoGood::Clause @number="52.202-1" @subject="Definitions." @reserved="false",
- #<SoFarSoGood::Clause @number="52.203-1" @subject="[Reserved]" @reserved="true",
- #<SoFarSoGood::Clause @number="52.203-2" @subject="Certificate of Independent Price Determination." @reserved="false",
- #<SoFarSoGood::Clause @number="52.203-3" @subject="Gratuities." @reserved="false", ... ]
+subchapters = SoFarSoGood.subchapters
+=> [#<SoFarSoGood::Subchapter year=2013 title=48 volume=2 chapter=1 name="FAR">,
+    #<SoFarSoGood::Subchapter year=2013 title=48 volume=3 chapter=2 name="DFARs">]
 
-# Get a list of clause numbers
-SoFarSoGood::Clauses.numbers
+# Get the FAR's subparts
+subparts = SoFarSoGood.far.subparts
+=> [#<SoFarSoGood::Subpart year=2013 title=48 volume=2 chapter=1 number="52.200" subject="Scope of subpart." document="FAR" reserved=false>,
+  #<SoFarSoGood::Subpart year=2013 title=48 volume=2 chapter=1 number="52.202-1" subject="Definitions." document="FAR" reserved=false>,
+  #<SoFarSoGood::Subpart year=2013 title=48 volume=2 chapter=1 number="52.203-1" subject="[Reserved]" document="FAR" reserved=true>,
+  #<SoFarSoGood::Subpart year=2013 title=48 volume=2 chapter=1 number="52.203-2" subject="Certificate of Independent Price Determination." document="FAR" reserved=false>,
+  #<SoFarSoGood::Subpart year=2013 title=48 volume=2 chapter=1 number="52.203-3" subject="Gratuities." document="FAR" reserved=false>,
+  #<SoFarSoGood::Subpart year=2013 title=48 volume=2 chapter=1 number="52.203-4" subject="[Reserved]" document="FAR" reserved=true>...]
+
+# Get a list of subpart numbers
+SoFarSoGood.far.numbers
 => ["52.200", "52.202-1", "52.203-1", "52.203-2", "52.203-3", "52.203-4", "52.203-5", ... ]
 
-# Get a list of clause numbers, excluding reserved clauses
-SoFarSoGood::Clauses.numbers(:exclude_reserved => true)
+# Get a list of subpart numbers, excluding reserved clauses
+SoFarSoGood.far.numbers(:reserved => false)
 => ["52.200", "52.202-1", "52.203-1", "52.203-2", "52.203-3", "52.203-4", "52.203-5", ... ]
 
-# Get a list of clause subjects
-SoFarSoGood::Clauses.subjects
+# Get a list of subpart subjects
+SoFarSoGood.far.subjects
 => ["Scope of subpart.", "Definitions.", "[Reserved]", "Certificate of Independent Price Determination.", ... ]
 ```
 
 ### Working with individual clauses
 
 ```ruby
-# Get a specific clause
-clause = SoFarSoGood::Clauses["52.202-1"]
-=> #<SoFarSoGood::Clause @number="52.202-1" @subject="Definitions." @reserved="false"
+# Get a specific subpart
+subpart = SoFarSoGood["52.202-1"]
+=> #<SoFarSoGood::Subpart year=2013 title=48 volume=2 chapter=1 number="52.202-1" subject="Definitions." document="FAR" reserved=false>
 
-clause.number
+subpart.number
 => "52.202-1"
 
-clause.subject
+subpart.subject
 => "Definitions"
 
-clause.reserved?
+subpart.reserved?
 => false
 
-clause.citation
+subpart.citation
 => "[69 FR 34228, June 18, 2004]"
 
 # The full clause body
-clause.body
+subpart.body
 => "As prescribed in 2.201, insert the following clause:..."
 
 # The actual clause text to be inserted in the contract
-clause.extract
+subpart.extract
 => "Definitions (JUL 2004)(a) When a solicitation provision or contract clause uses a word..."
 
-clause.link
+subpart.link
 => "http://www.law.cornell.edu/cfr/text/48/52.202-1"
 ```
 
-### Using clause data elsewhere
+### Using subpart data elsewhere
 
 #### As JSON
 
 ```ruby
 
-SoFarSoGood::Clauses.list.to_json
+SoFarSoGood.far.to_json
 => "[{\"number\":\"52.200\",\"subject\":\"Scope of subpart.\",\"reserverd\":false,\"citation\":..."
 ```
 
 #### As a markdown table
 
 ```ruby
-puts SoFarSoGood::Clauses.to_md
+puts SoFarSoGood.far.to_md
 |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Clause    | Description                                                                                                                                                   |
 |-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -101,8 +106,8 @@ puts SoFarSoGood::Clauses.to_md
 | 52.203-5  | Covenant Against Contingent Fees.                                                                                                                             |
 ...
 
-# Table without reserved clauses
-puts SoFarSoGood::Clauses.to_md(:exclude_reserved => true)
+# Table without reserved subparts
+puts SoFarSoGood.dfars.to_md(:reserved => false)
 
 # Table with links to text
 puts SoFarSoGood::Clauses.to_md(:links => true)
@@ -118,7 +123,7 @@ puts SoFarSoGood::Clauses.to_md(:links => true)
 
 #### As a CSV
 ```ruby
-puts SoFarSoGood::Clauses.to_csv(:exclude_reserved => true )
+puts SoFarSoGood.far.to_csv(:reserved => false)
 Clause,Description
 52.200,Scope of subpart.
 52.202-1,Definitions.
@@ -127,15 +132,15 @@ Clause,Description
 52.203-5,Covenant Against Contingent Fees.
 ```
 
-#### Individual clauses as markdown
+#### Individual subparts as markdown
 
 ```ruby
 # The body
-puts SoFarSoGood::Clauses["52.202-1"].body(:format => :markdown)
+puts SoFarSoGood["52.202-1"].body(:format => :markdown)
 => As prescribed in 2.201, insert the following clause:
 
 # The extract
-puts SoFarSoGood::Clauses["52.202-1"].extract(:format => :markdown)
+puts SoFarSoGood["52.202-1"].extract(:format => :markdown)
 => ### Definitions (JUL 2004)
 
 (a) When a solicitation provision or contract clause uses a word or term that is defined in the Federal Acquisition Regulation (FAR), the word or term has the same meaning as the definition in FAR 2.101 in effect at the time the solicitation was issued, unless— ...
