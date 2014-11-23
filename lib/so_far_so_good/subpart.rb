@@ -9,12 +9,12 @@ module SoFarSoGood
     attr_reader :document
 
     def initialize(hash)
-      @year     = hash[:year]
-      @title    = hash[:title]
-      @volume   = hash[:volume]
-      @chapter  = hash[:chapter]
-      @document = hash[:name]
-      @node     = hash[:node]
+      @year       = hash[:year]
+      @title      = hash[:title]
+      @volume     = hash[:volume]
+      @chapter    = hash[:chapter]
+      @subchapter = hash[:name]
+      @node       = hash[:node]
       normalize!
     end
 
@@ -61,18 +61,18 @@ module SoFarSoGood
 
     def to_hash(options={})
       {
-        :year      => year,
-        :title     => title,
-        :volume    => volume,
-        :chapter   => chapter,
-        :number    => number,
-        :subject   => subject,
-        :reserverd => reserved,
-        :citation  => citation,
-        :extract   => extract(options),
-        :body      => body(options),
-        :link      => link,
-        :document  => document,
+        :year        => year,
+        :title       => title,
+        :volume      => volume,
+        :chapter     => chapter,
+        :number      => number,
+        :subject     => subject,
+        :reserverd   => reserved,
+        :citation    => citation,
+        :extract     => extract(options),
+        :body        => body(options),
+        :link        => link,
+        :subchapter  => subchapter,
       }
     end
 
@@ -81,7 +81,7 @@ module SoFarSoGood
     end
 
     def inspect
-      "#<SoFarSoGood::Subpart year=#{year} title=#{title} volume=#{volume} chapter=#{chapter} number=\"#{number}\" subject=\"#{subject}\" document=\"#{document}\" reserved=#{reserved}>"
+      "#<SoFarSoGood::Subpart year=#{year} title=#{title} volume=#{volume} chapter=#{chapter} number=\"#{number}\" subject=\"#{subject}\" subchapter=\"#{subchapter}\" reserved=#{reserved}>"
     end
 
     private
