@@ -7,10 +7,10 @@ class TestSoFarSoGood < Minitest::Test
 
   should "return the clause hash" do
     assert_equal Array, SoFarSoGood.clauses.class
-    assert_equal 616, SoFarSoGood.clauses.count
+    assert_equal 626, SoFarSoGood.clauses.count
   end
 
   should "accept clause options" do
-    assert_equal 567, SoFarSoGood.clauses(:exclude_reserved => true).count
+    assert_equal 576, SoFarSoGood.clauses(:exclude_reserved => true).count
   end
 end

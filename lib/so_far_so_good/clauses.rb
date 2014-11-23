@@ -3,6 +3,7 @@ module SoFarSoGood
     class << self
 
       HEADINGS = ["Clause", "Description"]
+      YEAR = 2013
 
       def numbers(options = {})
         @numbers ||= clauses(options).map { |c| c.number }
@@ -50,7 +51,7 @@ module SoFarSoGood
       private
 
       def source_path
-        @source_path ||= File.expand_path "CFR-2010-title48-vol2-chap1-subchapH.xml", SoFarSoGood.vendor_directory
+        @source_path ||= File.expand_path "CFR-#{YEAR}-title48-vol2-chap1-subchapH.xml", SoFarSoGood.vendor_directory
       end
 
       def doc

@@ -1,4 +1,4 @@
 #!/bin/sh
 
 rm -Rf ./vendor/*
-wget http://www.gpo.gov/fdsys/pkg/CFR-2010-title48-vol2/xml/CFR-2010-title48-vol2-chap1-subchapH.xml -P vendor
+wget http://www.gpo.gov/fdsys/pkg/CFR-2013-title48-vol2/xml/CFR-2013-title48-vol2-chap1-subchapH.xml -P vendor

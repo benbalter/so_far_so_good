@@ -10,12 +10,12 @@ class TestSoFarSoGoodClauses < Minitest::Test
   end
 
   should "parse section numbers" do
-    assert_equal 616, SoFarSoGood::Clauses.numbers.count
+    assert_equal 626, SoFarSoGood::Clauses.numbers.count
     assert_equal "52.200", SoFarSoGood::Clauses.numbers.first
   end
 
   should "parse section descriptions" do
-    assert_equal 616, SoFarSoGood::Clauses.descriptions.count
+    assert_equal 626, SoFarSoGood::Clauses.descriptions.count
     assert_equal "Scope of subpart.", SoFarSoGood::Clauses.descriptions.first
   end
 
@@ -28,11 +28,11 @@ class TestSoFarSoGoodClauses < Minitest::Test
   end
 
   should "return all clauses" do
-    assert_equal 616, SoFarSoGood::Clauses.list.count
+    assert_equal 626, SoFarSoGood::Clauses.list.count
   end
 
   should "filter reserved clauses" do
-    assert_equal 567, SoFarSoGood::Clauses.list(:exclude_reserved => true).count
+    assert_equal 576, SoFarSoGood::Clauses.list(:exclude_reserved => true).count
   end
 
   should "build the markdown table" do
@@ -49,6 +49,6 @@ class TestSoFarSoGoodClauses < Minitest::Test
 
   should "output valid CSV" do
     csv = CSV.parse SoFarSoGood::Clauses.to_csv
-    assert_equal ["52.200", "Scope of subpart."], csv[0]
+    assert_equal ["52.200", "Scope of subpart."], csv[1]
   end
 end
