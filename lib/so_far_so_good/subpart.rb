@@ -6,7 +6,7 @@ module SoFarSoGood
     attr_reader :title
     attr_reader :volume
     attr_reader :chapter
-    attr_reader :document
+    attr_reader :subchapter
 
     def initialize(hash)
       @year       = hash[:year]
