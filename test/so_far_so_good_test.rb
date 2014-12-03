@@ -12,7 +12,7 @@ class TestSoFarSoGood < Minitest::Test
 
   should "know the DFARs" do
     assert_equal SoFarSoGood::Subchapter, SoFarSoGood.dfars.class
-    assert_equal "DFARs", SoFarSoGood.dfars.name
+    assert_equal "DFARS", SoFarSoGood.dfars.name
   end
 
   should "return subchapters" do

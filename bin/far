@@ -2,7 +2,10 @@
 
 require_relative "../lib/so_far_so_good"
 clause = SoFarSoGood[ARGV[0]]
-if clause
+
+if ARGV[0].nil? || ARGV[0] == "--help"
+  puts "Usage: far [CLAUSE NUMBER]"
+elsif clause
   puts clause.extract(:format => :markdown)
 else
   puts "Not found."
