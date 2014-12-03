@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/so_far_so_good"
+clause = SoFarSoGood[ARGV[0]]
+if clause
+  puts clause.extract(:format => :markdown)
+else
+  puts "Not found."
+end
