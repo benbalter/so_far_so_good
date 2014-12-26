@@ -75,8 +75,12 @@ module SoFarSoGood
       @source_path ||= File.expand_path filename, SoFarSoGood.vendor_directory
     end
 
+    def source_contents
+      File.open(source_path, :encoding => 'utf-8')
+    end
+
     def doc
-      @doc ||= Nokogiri::XML(File.open(source_path)) do |config|
+      @doc ||= Nokogiri::XML(source_contents) do |config|
         config.noblanks.nonet
       end
     end
