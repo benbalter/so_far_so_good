@@ -43,7 +43,7 @@ module SoFarSoGood
       options = {:format => :html}.merge(options)
       @extract ||= node.css("EXTRACT").inner_html
       if options[:format] == :markdown
-        ReverseMarkdown.convert @extract
+        ReverseMarkdown.convert @extract, :unknown_tags => :bypass
       else
         @extract
       end
@@ -53,7 +53,7 @@ module SoFarSoGood
       options = {:format => :html}.merge(options)
       @body ||= node.css("> P").to_html
       if options[:format] == :markdown
-        ReverseMarkdown.convert @body
+        ReverseMarkdown.convert @body, :unknown_tags => :bypass
       else
         @body
       end

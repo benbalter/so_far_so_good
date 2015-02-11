@@ -49,6 +49,10 @@ class TestSoFarSoGoodSubpart < Minitest::Test
     assert_includes @subpart.extract(:format => :markdown), "### Covenant Against Contingent Fees (APR 1984)\n\n(a)"
   end
 
+  should "not pass unknown tags in markdown" do
+    refute_match /gpotable/, SoFarSoGood["52.225-4"].extract(:format => :markdown)
+  end
+
   should "build the link" do
     assert_equal "http://www.law.cornell.edu/cfr/text/48/52.203-5", @subpart.link
   end

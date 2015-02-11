@@ -5,8 +5,11 @@ clause = SoFarSoGood[ARGV[0]]
 
 if ARGV[0].nil? || ARGV[0] == "--help"
   puts "Usage: far [CLAUSE NUMBER]"
+  exit 1
 elsif clause
   puts clause.extract(:format => :markdown)
+  exit 0
 else
   puts "Not found."
+  exit 1
 end
