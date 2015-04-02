@@ -27,7 +27,7 @@ module SoFarSoGood
     end
 
     def reserved?
-      @reserved ||= !node.css("RESERVED").text.empty?
+      @reserved ||= !node.css("RESERVED").text.empty? || subject == "[Reserved]"
     end
     alias_method :reserved, :reserved?
 

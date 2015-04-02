@@ -20,10 +20,10 @@ class TestSoFarSoGood < Minitest::Test
   end
 
   should "return subparts" do
-    assert_equal 981, SoFarSoGood.subparts.count
+    assert_equal 1003, SoFarSoGood.subparts.count
   end
 
   should "accept subpart options" do
-    assert_equal 907, SoFarSoGood.subparts(:reserved => false).count
+    assert_equal 926, SoFarSoGood.subparts(:reserved => false).count
   end
 end

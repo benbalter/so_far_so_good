@@ -46,7 +46,7 @@ class TestSoFarSoGoodSubpart < Minitest::Test
   end
 
   should "convert the extract to markdown" do
-    assert_includes @subpart.extract(:format => :markdown), "### Covenant Against Contingent Fees (APR 1984)\n\n(a)"
+    assert_includes @subpart.extract(:format => :markdown), "### Covenant Against Contingent Fees (MAY 2014)\n\n(a)"
   end
 
   should "not pass unknown tags in markdown" do

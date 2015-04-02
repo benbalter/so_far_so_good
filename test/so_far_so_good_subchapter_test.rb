@@ -15,12 +15,12 @@ class TestSoFarSoGoodSubchapter < Minitest::Test
   end
 
   should "parse subpart numbers" do
-    assert_equal 626, @subchapter.numbers.count
+    assert_equal 635, @subchapter.numbers.count
     assert_equal "52.200", @subchapter.numbers.first
   end
 
   should "parse subpart descriptions" do
-    assert_equal 626, @subchapter.subjects.count
+    assert_equal 635, @subchapter.subjects.count
     assert_equal "Scope of subpart.", @subchapter.subjects.first
   end
 
@@ -33,11 +33,11 @@ class TestSoFarSoGoodSubchapter < Minitest::Test
   end
 
   should "return all subparts" do
-    assert_equal 626, @subchapter.subparts.count
+    assert_equal 635, @subchapter.subparts.count
   end
 
   should "filter reserved subparts" do
-    assert_equal 576, @subchapter.subparts(:reserved => false).count
+    assert_equal 585, @subchapter.subparts(:reserved => false).count
   end
 
   should "build the markdown table" do
