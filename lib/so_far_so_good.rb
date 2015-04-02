@@ -10,7 +10,7 @@ require_relative "so_far_so_good/subpart"
 module SoFarSoGood
 
   HEADINGS = ["Clause", "Description"]
-  YEAR = 2013
+  YEAR = 2014
   TITLE = 48
 
   class << self
