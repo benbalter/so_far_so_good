@@ -3,7 +3,7 @@ require 'helper'
 class TestSoFarSoGoodSubchapter < Minitest::Test
 
   def setup
-    @subchapter = SoFarSoGood.far
+    @subchapter = SoFarSoGood.clauses
   end
 
   should "know the subchapter file" do
@@ -15,12 +15,12 @@ class TestSoFarSoGoodSubchapter < Minitest::Test
   end
 
   should "parse subpart numbers" do
-    assert_equal 635, @subchapter.numbers.count
-    assert_equal "52.200", @subchapter.numbers.first
+    assert_equal 790, @subchapter.numbers.count
+    assert_equal "52.100", @subchapter.numbers.first
   end
 
   should "parse subpart descriptions" do
-    assert_equal 635, @subchapter.subjects.count
+    assert_equal 790, @subchapter.subjects.count
     assert_equal "Scope of subpart.", @subchapter.subjects.first
   end
 
@@ -33,15 +33,15 @@ class TestSoFarSoGoodSubchapter < Minitest::Test
   end
 
   should "return all subparts" do
-    assert_equal 635, @subchapter.subparts.count
+    assert_equal 790, @subchapter.subparts.count
   end
 
   should "filter reserved subparts" do
-    assert_equal 585, @subchapter.subparts(:reserved => false).count
+    assert_equal 725, @subchapter.subparts(:reserved => false).count
   end
 
   should "build the markdown table" do
-    assert_includes @subchapter.to_md, "-|\n| 52.200              | Scope of subpart."
+    assert_includes @subchapter.to_md, "-|\n| 52.100                 | Scope of subpart."
   end
 
   should "exclude reserved in markdown table when asked" do
@@ -54,6 +54,6 @@ class TestSoFarSoGoodSubchapter < Minitest::Test
 
   should "output valid CSV" do
     csv = CSV.parse @subchapter.to_csv
-    assert_equal ["52.200", "Scope of subpart."], csv[1]
+    assert_equal ["52.100", "Scope of subpart."], csv[1]
   end
 end

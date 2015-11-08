@@ -10,9 +10,9 @@ class TestSoFarSoGood < Minitest::Test
     assert_equal "FAR", SoFarSoGood.far.name
   end
 
-  should "know the DFARs" do
-    assert_equal SoFarSoGood::Subchapter, SoFarSoGood.dfars.class
-    assert_equal "DFARS", SoFarSoGood.dfars.name
+  should "know the FAR Clauses" do
+    assert_equal SoFarSoGood::Subchapter, SoFarSoGood.clauses.class
+    assert_equal "FAR Clauses", SoFarSoGood.clauses.name
   end
 
   should "return subchapters" do
@@ -20,10 +20,10 @@ class TestSoFarSoGood < Minitest::Test
   end
 
   should "return subparts" do
-    assert_equal 1003, SoFarSoGood.subparts.count
+    assert_equal 3250, SoFarSoGood.subparts.count
   end
 
   should "accept subpart options" do
-    assert_equal 926, SoFarSoGood.subparts(:reserved => false).count
+    assert_equal 3134, SoFarSoGood.subparts(:reserved => false).count
   end
 end

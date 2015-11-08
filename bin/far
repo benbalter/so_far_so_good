@@ -1,13 +1,20 @@
 #!/usr/bin/env ruby
 
 require_relative "../lib/so_far_so_good"
-clause = SoFarSoGood[ARGV[0]]
+clause = SoFarSoGood[ARGV[1]]
 
-if ARGV[0].nil? || ARGV[0] == "--help"
-  puts "Usage: far [CLAUSE NUMBER]"
+if ARGV[1].nil? || ARGV[0] == "--help"
+  puts "Usage: far [output] [CLAUSE NUMBER]"
   exit 1
 elsif clause
-  puts clause.extract(:format => :markdown)
+  if ARGV[0] == "body"
+    puts clause.body(:format => :markdown)
+  elsif ARGV[0] == "extract"
+    puts clause.extract(:format => :markdown)
+  else
+    puts "Usage: far [output] [CLAUSE NUMBER]"
+    exit 1
+  end
   exit 0
 else
   puts "Not found."

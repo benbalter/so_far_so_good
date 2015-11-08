@@ -15,15 +15,15 @@ module SoFarSoGood
 
   class << self
     def far
-      @far ||= SoFarSoGood::Subchapter.new(:name => "FAR",   :volume => 2, :chapter => 1)
+      @far ||= SoFarSoGood::Subchapter.new(:name => "FAR",   :volume => 1, :chapter => 1)
     end
 
-    def dfars
-      @dfars ||= SoFarSoGood::Subchapter.new(:name => "DFARS", :volume => 3, :chapter => 2)
+    def clauses
+      @dfars ||= SoFarSoGood::Subchapter.new(:name => "FAR Clauses", :volume => 2, :chapter => 1)
     end
 
     def subchapters
-      [far, dfars]
+      [far, clauses]
     end
 
     def subparts(options = {})
