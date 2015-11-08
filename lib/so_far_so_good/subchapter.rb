@@ -68,7 +68,7 @@ module SoFarSoGood
     private
 
     def filename
-      "CFR-#{YEAR}-title#{TITLE}-vol#{volume}-chap#{chapter}-subchapH.xml"
+      "CFR-#{YEAR}-title#{TITLE}-vol#{volume}-chap#{chapter}.xml"
     end
 
     def source_path
@@ -86,7 +86,7 @@ module SoFarSoGood
     end
 
     def sections
-      @subpart ||= doc.css("PART SUBPART")[name == "FAR" ? 4 : 3].children.css("SECTION")
+      @subpart ||= doc.css("PART SUBPART").children.css("SECTION")
     end
   end
 end

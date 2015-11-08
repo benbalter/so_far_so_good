@@ -4,6 +4,6 @@ YEAR=$(bundle exec ruby -r './lib/so_far_so_good.rb' -e "puts SoFarSoGood::YEAR"
 
 rm -Rf ./vendor/*
 
-wget "http://www.gpo.gov/fdsys/pkg/CFR-$YEAR-title48-vol2/xml/CFR-$YEAR-title48-vol2-chap1-subchapH.xml" -P vendor
+wget "http://www.gpo.gov/fdsys/pkg/CFR-$YEAR-title48-vol1/xml/CFR-$YEAR-title48-vol1-chap1.xml" -P vendor
 
-wget "http://www.gpo.gov/fdsys/pkg/CFR-$YEAR-title48-vol3/xml/CFR-$YEAR-title48-vol3-chap2-subchapH.xml" -P vendor
+wget "http://www.gpo.gov/fdsys/pkg/CFR-$YEAR-title48-vol2/xml/CFR-$YEAR-title48-vol2-chap1.xml" -P vendor

@@ -3,9 +3,9 @@ require 'helper'
 class TestSoFarSoGoodSubpart < Minitest::Test
 
   def setup
-    @subchapter = SoFarSoGood.far
+    @subchapter = SoFarSoGood.clauses
     @nodes = @subchapter.send(:sections)
-    @subpart = SoFarSoGood::Subpart.new(:node => @nodes[6])
+    @subpart = SoFarSoGood::Subpart.new(:node => @nodes[14])
   end
 
   should "Store the node" do
