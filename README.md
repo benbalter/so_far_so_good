@@ -22,6 +22,18 @@ It will give you access to this information in object-oriented Ruby, as JSON, or
 
 ## Usage
 
+### Command line interface
+
+`./bin/far [output] [NUMBER]`
+
+The output option must be either "body" or "extract".
+
+For example:
+``` bash
+$ far body 13.101
+# 13.101. General.
+```
+
 ### Basic usage
 
 ```ruby
